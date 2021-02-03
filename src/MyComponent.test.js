@@ -1,13 +1,20 @@
 import React from 'react' 
-import MyComponent from './MyComponent';
 
 import Enzyme, { mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 Enzyme.configure({ adapter: new Adapter() });
 
+import MyComponent from './MyComponent';
+
 describe('MyComponent', () => {
-    it('works', () => {
-        expect(2 + 2).toEqual(4);
+    const onCountChange = jest.fn();
+    let wrapper;
+    beforeEach(() => {
+        wrapper = mount(<MyComponent onCountChange={onCountChange} />)
+    });
+    it('renders', () => {
+        console.log(wrapper.debug());
+        expect(wrapper).not.toBeNull();
     })
 })
 
